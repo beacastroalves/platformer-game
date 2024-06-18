@@ -27,7 +27,6 @@ public class GameWindow {
 
       @Override
       public void windowGainedFocus(WindowEvent e) {
-        System.out.println("im back");
       }
     });
   }
