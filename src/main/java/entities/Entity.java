@@ -19,8 +19,9 @@ public abstract class Entity {
 
   }
 
-  protected void drawHitbox(Graphics g) {
+  protected void drawHitbox(Graphics g, int xLvlOffset) {
     // for debugging the hitbox
+    g.drawRect((int) hitbox.x - xLvlOffset, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
   }
 
   protected void initHitbox(float x, float y, int width, int height) {
