@@ -1,9 +1,9 @@
 package gamestates;
 
-import java.awt.event.MouseEvent;
-
 import main.Game;
 import ui.MenuButton;
+
+import java.awt.event.MouseEvent;
 
 public class State {
   protected Game game;

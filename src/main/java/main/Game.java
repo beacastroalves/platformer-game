@@ -7,15 +7,6 @@ import gamestates.Playing;
 import java.awt.Graphics;
 
 public class Game implements Runnable {
-  private GameWindow gameWindow;
-  private GamePanel gamePanel;
-  private Thread gameThread;
-  private final int FPS_SET = 120;
-  private final int UPS_SET = 200;
-
-  private Playing playing;
-  private Menu menu;
-
   public final static int TILES_DEFAULT_SIZE = 32;
   public final static float SCALE = 1.5f;
   public final static int TILES_IN_WIDTH = 26;
@@ -23,7 +14,13 @@ public class Game implements Runnable {
   public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
   public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
   public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
-
+  private final int FPS_SET = 120;
+  private final int UPS_SET = 200;
+  private GameWindow gameWindow;
+  private GamePanel gamePanel;
+  private Thread gameThread;
+  private Playing playing;
+  private Menu menu;
 
 
   public Game() {

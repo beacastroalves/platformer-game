@@ -1,12 +1,16 @@
 package ui;
 
+import gamestates.GameState;
+import utilz.LoadSave;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import gamestates.GameState;
-import utilz.LoadSave;
-import static utilz.Constants.UI.Buttons.*;
+import static utilz.Constants.UI.Buttons.B_HEIGHT;
+import static utilz.Constants.UI.Buttons.B_HEIGHT_DEFAULT;
+import static utilz.Constants.UI.Buttons.B_WIDTH;
+import static utilz.Constants.UI.Buttons.B_WIDTH_DEFAULT;
 
 public class MenuButton {
   private int xPos, yPos, rowIndex, index;
@@ -36,7 +40,7 @@ public class MenuButton {
       imgs[i] = temp.getSubimage(
           i * B_WIDTH_DEFAULT, rowIndex * B_HEIGHT_DEFAULT,
           B_WIDTH_DEFAULT, B_HEIGHT_DEFAULT
-          );
+      );
     }
   }
 

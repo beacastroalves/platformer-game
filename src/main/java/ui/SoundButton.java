@@ -1,10 +1,11 @@
 package ui;
 
 import utilz.LoadSave;
-import static utilz.Constants.UI.PauseButtons.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import static utilz.Constants.UI.PauseButtons.SOUND_SIZE_DEFAULT;
 
 public class SoundButton extends PauseButton {
   private BufferedImage[][] soundImgs;
@@ -30,17 +31,17 @@ public class SoundButton extends PauseButton {
   }
 
   public void update() {
-    if(muted) {
+    if (muted) {
       rowIndex = 1;
     } else {
       rowIndex = 0;
     }
 
     colIndex = 0;
-    if(mouseOver) {
+    if (mouseOver) {
       colIndex = 1;
     }
-    if(mousePressed) {
+    if (mousePressed) {
       colIndex = 2;
     }
   }

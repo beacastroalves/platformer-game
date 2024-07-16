@@ -3,17 +3,16 @@ package ui;
 import gamestates.GameState;
 import gamestates.Playing;
 import main.Game;
-import utilz.Constants.*;
 import utilz.LoadSave;
 
-import static utilz.Constants.UI.PauseButtons.*;
-import static utilz.Constants.UI.URMButtons.*;
-import static utilz.Constants.UI.VolumeButton.*;
-
 import java.awt.Graphics;
-import java.awt.event.KeyEvent.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+
+import static utilz.Constants.UI.PauseButtons.SOUND_SIZE;
+import static utilz.Constants.UI.URMButtons.URM_SIZE;
+import static utilz.Constants.UI.VolumeButton.SLIDER_WIDTH;
+import static utilz.Constants.UI.VolumeButton.VOLUME_HEIGHT;
 
 
 public class PauseOverlay {
@@ -97,23 +96,23 @@ public class PauseOverlay {
   }
 
   public void mouseDragged(MouseEvent e) {
-    if(volumeButton.isMousePressed()) {
+    if (volumeButton.isMousePressed()) {
       volumeButton.changeX(e.getX());
     }
   }
 
   public void mousePressed(MouseEvent e) {
-    if(isIn(e, musicButton)) {
+    if (isIn(e, musicButton)) {
       musicButton.setMousePressed(true);
-    } else if(isIn(e, sfxButton)) {
+    } else if (isIn(e, sfxButton)) {
       sfxButton.setMousePressed(true);
-    } else if(isIn(e, menuB)) {
+    } else if (isIn(e, menuB)) {
       menuB.setMousePressed(true);
-    } else if(isIn(e, replayB)) {
+    } else if (isIn(e, replayB)) {
       replayB.setMousePressed(true);
-    } else if(isIn(e, unpauseB)) {
+    } else if (isIn(e, unpauseB)) {
       unpauseB.setMousePressed(true);
-    } else if(isIn(e, volumeButton)) {
+    } else if (isIn(e, volumeButton)) {
       volumeButton.setMousePressed(true);
     }
   }
@@ -159,17 +158,17 @@ public class PauseOverlay {
     unpauseB.setMouseOver(false);
     volumeButton.setMouseOver(false);
 
-    if(isIn(e, musicButton)) {
+    if (isIn(e, musicButton)) {
       musicButton.setMouseOver(true);
-    } else if(isIn(e, sfxButton)) {
+    } else if (isIn(e, sfxButton)) {
       sfxButton.setMouseOver(true);
-    } else if(isIn(e, menuB)) {
+    } else if (isIn(e, menuB)) {
       menuB.setMouseOver(true);
-    } else if(isIn(e, replayB)) {
+    } else if (isIn(e, replayB)) {
       replayB.setMouseOver(true);
-    } else if(isIn(e, unpauseB)) {
+    } else if (isIn(e, unpauseB)) {
       unpauseB.setMouseOver(true);
-    } else if(isIn(e, volumeButton)) {
+    } else if (isIn(e, volumeButton)) {
       volumeButton.setMouseOver(true);
     }
   }

@@ -32,14 +32,14 @@ public class Menu extends State implements StateMethods {
   }
 
   private void loadButtons() {
-    buttons[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE),0, GameState.PLAYING);
-    buttons[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE),1, GameState.OPTIONS);
-    buttons[2] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE),2, GameState.QUIT);
+    buttons[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, GameState.PLAYING);
+    buttons[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, GameState.OPTIONS);
+    buttons[2] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, GameState.QUIT);
   }
 
   @Override
   public void update() {
-    for(MenuButton mb : buttons) {
+    for (MenuButton mb : buttons) {
       mb.update();
     }
   }
@@ -52,7 +52,7 @@ public class Menu extends State implements StateMethods {
     g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
     g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
 
-    for(MenuButton mb : buttons) {
+    for (MenuButton mb : buttons) {
       mb.draw(g);
     }
   }
@@ -64,7 +64,7 @@ public class Menu extends State implements StateMethods {
 
   @Override
   public void mousePressed(MouseEvent e) {
-    for(MenuButton mb : buttons) {
+    for (MenuButton mb : buttons) {
       if (isIn(e, mb)) {
         mb.setMousePressed(true);
         break;
@@ -74,9 +74,9 @@ public class Menu extends State implements StateMethods {
 
   @Override
   public void mouseReleased(MouseEvent e) {
-    for(MenuButton mb : buttons) {
-      if(isIn(e, mb)) {
-        if(mb.isMousePressed()) {
+    for (MenuButton mb : buttons) {
+      if (isIn(e, mb)) {
+        if (mb.isMousePressed()) {
           mb.applyGamestate();
         }
         break;
@@ -86,7 +86,7 @@ public class Menu extends State implements StateMethods {
   }
 
   private void resetButtons() {
-    for(MenuButton mb : buttons) {
+    for (MenuButton mb : buttons) {
       mb.resetBools();
     }
   }

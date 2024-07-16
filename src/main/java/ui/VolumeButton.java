@@ -4,7 +4,11 @@ import utilz.LoadSave;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import static utilz.Constants.UI.VolumeButton.*;
+
+import static utilz.Constants.UI.VolumeButton.SLIDER_DEFAULT_WIDTH;
+import static utilz.Constants.UI.VolumeButton.VOLUME_DEFAULT_HEIGHT;
+import static utilz.Constants.UI.VolumeButton.VOLUME_DEFAULT_WIDTH;
+import static utilz.Constants.UI.VolumeButton.VOLUME_WIDTH;
 
 
 public class VolumeButton extends PauseButton {
@@ -16,7 +20,7 @@ public class VolumeButton extends PauseButton {
   private int buttonX, minX, maxX;
 
   public VolumeButton(int x, int y, int width, int height) {
-    super(x + width/2, y, VOLUME_WIDTH, height);
+    super(x + width / 2, y, VOLUME_WIDTH, height);
     bounds.x -= VOLUME_WIDTH / 2;
     buttonX = x + width / 2;
     this.x = x;

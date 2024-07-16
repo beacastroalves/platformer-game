@@ -1,13 +1,15 @@
 package ui;
 
+import utilz.LoadSave;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import utilz.LoadSave;
-import static utilz.Constants.UI.URMButtons.*;
+import static utilz.Constants.UI.URMButtons.URM_DEFAULT_SIZE;
+import static utilz.Constants.UI.URMButtons.URM_SIZE;
 
 
-public class UrmButton extends PauseButton{
+public class UrmButton extends PauseButton {
   private BufferedImage[] imgs;
   private int rowIndex, index;
   private boolean mouseOver, mousePressed;
@@ -30,10 +32,10 @@ public class UrmButton extends PauseButton{
 
   public void update() {
     index = 0;
-    if(mouseOver) {
+    if (mouseOver) {
       index = 1;
     }
-    if(mousePressed) {
+    if (mousePressed) {
       index = 2;
     }
   }

@@ -1,12 +1,19 @@
 package entities;
+
 import main.Game;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
-import static utilz.Constants.Directions.*;
-import static utilz.Constants.EnemyConstants.*;
+import static utilz.Constants.Directions.RIGHT;
+import static utilz.Constants.EnemyConstants.ATTACK;
+import static utilz.Constants.EnemyConstants.CRABBY;
+import static utilz.Constants.EnemyConstants.CRABBY_HEIGHT;
+import static utilz.Constants.EnemyConstants.CRABBY_WIDTH;
+import static utilz.Constants.EnemyConstants.HIT;
+import static utilz.Constants.EnemyConstants.IDLE;
+import static utilz.Constants.EnemyConstants.RUNNING;
 
 public class Crabby extends Enemy {
 
@@ -22,11 +29,11 @@ public class Crabby extends Enemy {
 
   private void initAttackBox() {
     attackBox = new Rectangle2D.Float(x, y, (int) (82 * Game.SCALE), (int) (19 * Game.SCALE));
-    attackBoxOffsetX = (int)(Game.SCALE * 30);
+    attackBoxOffsetX = (int) (Game.SCALE * 30);
   }
 
   public void update(int[][] lvlData, Player player) {
-    updateMove(lvlData, player);
+    updateBehavior(lvlData, player);
     updateAnimationTick();
     updateAttackBox();
   }
@@ -36,12 +43,12 @@ public class Crabby extends Enemy {
     attackBox.y = hitbox.y;
   }
 
-  public void updateMove(int[][] lvlData, Player player) {
-    if(firstUpdate) {
+  public void updateBehavior(int[][] lvlData, Player player) {
+    if (firstUpdate) {
       firstUpdateCheck(lvlData);
     }
 
-    if(inAir) {
+    if (inAir) {
       updateInAir(lvlData);
     } else {
       switch (enemyState) {
@@ -49,13 +56,24 @@ public class Crabby extends Enemy {
           newState(RUNNING);
           break;
         case RUNNING:
-          if(canSeePlayer(lvlData, player)) {
+          if (canSeePlayer(lvlData, player)) {
             turnTowardsPlayer(player);
           }
           if (isPlayerCloseForAttack(player)) {
             newState(ATTACK);
           }
           move(lvlData);
+          break;
+        case ATTACK:
+          if (aniIndex == 0) {
+            attackChecked = false;
+          }
+          if (aniIndex == 3 && !attackChecked) {
+            checkPlayerHit(attackBox, player);
+          }
+          break;
+        case HIT:
+
           break;
       }
     }
@@ -64,11 +82,11 @@ public class Crabby extends Enemy {
   public void drawAttackBox(Graphics g, int xLvlOffset) {
     g.setColor(Color.RED);
     g.drawRect((int) attackBox.x - xLvlOffset, (int) attackBox.y,
-              (int) attackBox.width, (int) attackBox.height);
+        (int) attackBox.width, (int) attackBox.height);
   }
 
   public int flipX() {
-    if(walkDir == RIGHT) {
+    if (walkDir == RIGHT) {
       return width;
     } else {
       return 0;
@@ -77,7 +95,7 @@ public class Crabby extends Enemy {
 
 
   public int flipW() {
-    if(walkDir == RIGHT) {
+    if (walkDir == RIGHT) {
       return -1;
     } else {
       return 1;
