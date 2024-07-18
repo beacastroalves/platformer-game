@@ -1,8 +1,15 @@
 package utilz;
 
+import entities.Crabby;
 import main.Game;
 
+import java.awt.Color;
+import java.awt.Point;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import static utilz.Constants.EnemyConstants.CRABBY;
 
 public class HelpMethods {
 
@@ -81,7 +88,11 @@ public class HelpMethods {
   }
 
   public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+    if(xSpeed > 0) {
+      return IsSolid(hitbox.x + hitbox.width + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+    } else {
     return IsSolid(hitbox.x + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+    }
   }
 
   public static boolean IsAllTilesWalkable(int xStart, int xEnd, int y, int[][] lvlData) {
@@ -108,5 +119,46 @@ public class HelpMethods {
     }
   }
 
+  public static int[][] GetLevelData(BufferedImage img) {
+    int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+    for (int i = 0; i < img.getHeight(); i++) {
+      for (int j = 0; j < img.getWidth(); j++) {
+        Color color = new Color(img.getRGB(j, i));
+        int value = color.getRed();
+        if (value >= 48) {
+          value = 0;
+        }
+        lvlData[i][j] = value;
+      }
+    }
+    return lvlData;
+  }
+
+  public static ArrayList<Crabby> GetCrabs(BufferedImage img) {
+    ArrayList<Crabby> list = new ArrayList<>();
+    for (int i = 0; i < img.getHeight(); i++) {
+      for (int j = 0; j < img.getWidth(); j++) {
+        Color color = new Color(img.getRGB(j, i));
+        int value = color.getGreen();
+        if (value == CRABBY) {
+          list.add(new Crabby(j * Game.TILES_SIZE, i * Game.TILES_SIZE));
+        }
+      }
+    }
+    return list;
+  }
+
+  public static Point GetPlayerSpawn(BufferedImage img) {
+    for (int i = 0; i < img.getHeight(); i++) {
+      for (int j = 0; j < img.getWidth(); j++) {
+        Color color = new Color(img.getRGB(j, i));
+        int value = color.getGreen();
+        if (value == 100) {
+          return new Point(i * Game.TILES_SIZE, j * Game.TILES_SIZE);
+        }
+      }
+    }
+    return new Point(1 * Game.TILES_SIZE, 1 * Game.TILES_SIZE);
+  }
 
 }
