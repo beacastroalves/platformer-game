@@ -154,7 +154,7 @@ public class HelpMethods {
         Color color = new Color(img.getRGB(j, i));
         int value = color.getGreen();
         if (value == 100) {
-          return new Point(i * Game.TILES_SIZE, j * Game.TILES_SIZE);
+          return new Point(j * Game.TILES_SIZE, i * Game.TILES_SIZE);
         }
       }
     }
