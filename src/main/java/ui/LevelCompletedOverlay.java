@@ -5,6 +5,7 @@ import gamestates.Playing;
 import main.Game;
 import utilz.LoadSave;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -41,6 +42,9 @@ public class LevelCompletedOverlay {
   }
 
   public void draw(Graphics g) {
+    g.setColor(new Color(0, 0, 0, 180));
+    g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+
     g.drawImage(img, bgX, bgY, bgW, bgH, null);
     next.draw(g);
     menu.draw(g);
