@@ -4,6 +4,7 @@ import entities.Crabby;
 import main.Game;
 import objects.GameContainer;
 import objects.Potion;
+import objects.Spike;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -192,4 +193,18 @@ public class HelpMethods {
     return list;
   }
 
+  public static ArrayList<Spike> GetSpikes(BufferedImage img) {
+    ArrayList<Spike> list = new ArrayList<>();
+
+    for (int i = 0; i < img.getHeight(); i++) {
+      for (int j = 0; j < img.getWidth(); j++) {
+        Color color = new Color(img.getRGB(j, i));
+        int value = color.getBlue();
+        if (value == SPIKE) {
+          list.add(new Spike(j * Game.TILES_SIZE, i * Game.TILES_SIZE, SPIKE));
+        }
+      }
+    }
+    return list;
+  }
 }
