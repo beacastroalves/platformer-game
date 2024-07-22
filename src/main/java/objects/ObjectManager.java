@@ -1,10 +1,12 @@
 package objects;
 
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import gamestates.Playing;
+import levels.Level;
 import utilz.LoadSave;
 import static utilz.Constants.ObjectConstants.*;
 
@@ -18,14 +20,47 @@ public class ObjectManager {
   public ObjectManager(Playing playing) {
     this.playing = playing;
     loadImgs();
+  }
 
-    potions = new ArrayList<>();
-//    potions.add(new Potion(300, 300, RED_POTION));
-//    potions.add(new Potion(400, 300, BLUE_POTION));
+  public void checkObjectTouched(Rectangle2D.Float hitbox) {
+    for (Potion p : potions) {
+      if(p.isActive()) {
+        if(hitbox.intersects(p.getHitbox())){
+          p.setActive(false);
+          applyEffectToPlayer(p);
+        }
+      }
+    }
+  }
 
-    containers = new ArrayList<>();
-//    containers.add(new GameContainer(500, 300, BARREL));
-//    containers.add(new GameContainer(600, 300, BARREL));
+  public void applyEffectToPlayer(Potion p) {
+    if(p.getObjType() == RED_POTION) {
+      playing.getPlayer().changeHealth(RED_POTION_VALUE);
+    } else {
+      playing.getPlayer().changePower(BLUE_POTION_VALUE);
+    }
+  }
+
+  public void checkObjectHit(Rectangle2D.Float attackbox) {
+    for (GameContainer gc : containers) {
+      if (gc.isActive()) {
+        if (gc.getHitbox().intersects(attackbox)) {
+          gc.setAnimation(true);
+          int type = 0;
+          if (gc.getObjType() == BOX) {
+            type = 1;
+          }
+          potions.add(new Potion((int) (gc.getHitbox().x + gc.getHitbox().width / 2),
+              (int) (gc.getHitbox().y - gc.getHitbox().height / 2), type));
+          return;
+        }
+      }
+    }
+  }
+
+  public void loadObject(Level newLevel) {
+    potions = newLevel.getPotions();
+    containers = newLevel.getContainers();
   }
 
   private void loadImgs() {
@@ -104,6 +139,13 @@ public class ObjectManager {
       }
     }
   }
-
+  public void resetAllObjects() {
+    for (Potion p : potions) {
+      p.reset();
+    }
+    for (GameContainer gc : containers) {
+      gc.reset();
+    }
+  }
 
 }
