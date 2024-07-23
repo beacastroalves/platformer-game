@@ -49,14 +49,15 @@ public class Player extends Entity {
   private boolean attackChecked;
   private Playing playing;
 
+  private int tileY = 0;
 
   public Player(float x, float y, int width, int height, Playing playing) {
     super(x, y, width, height);
     this.playing = playing;
     this.state = IDLE;
     this.maxHealth = 100;
-    this.currentHealth = 35;
-//    this.currentHealth = maxHealth;
+//    this.currentHealth = 35;
+    this.currentHealth = maxHealth;
     this.walkSpeed = Game.SCALE * 1.0F;
     loadAnimations();
     initHitbox(20 , 27);
@@ -89,6 +90,7 @@ public class Player extends Entity {
     if(moving) {
       checkPotionTouched();
       checkSpikesTouched();
+      tileY = (int) (hitbox.y / Game.TILES_SIZE);
     }
     if (attacking) {
       checkAttack();
@@ -353,5 +355,8 @@ public class Player extends Entity {
     }
   }
 
+  public int getTileY() {
+    return tileY;
+  }
 
 }
