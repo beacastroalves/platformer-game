@@ -18,6 +18,7 @@ public class VolumeButton extends PauseButton {
   private int index = 0;
   private boolean mouseOver, mousePressed;
   private int buttonX, minX, maxX;
+  private float floatValue = 0f;
 
   public VolumeButton(int x, int y, int width, int height) {
     super(x + width / 2, y, VOLUME_WIDTH, height);
@@ -57,28 +58,33 @@ public class VolumeButton extends PauseButton {
   }
 
   public void changeX(int x) {
-//    if(x < this.minX) {
-//      this.buttonX = this.minX;
-//    } else if(x > this.maxX) {
-//      this.buttonX = this.maxX;
-//    } else {
-//      this.buttonX = x;
-//    }
+    /*    2th solution
+    if(x < minX) {
+      buttonX = minX;
+    } else if(x > maxX) {
+      buttonX = maxX;
+    } else {
+      buttonX = x;
+    }
+     */
 
     this.buttonX = clamp(x, this.minX, this.maxX);
 
+    updateFloatValue();
     bounds.x = buttonX - VOLUME_WIDTH / 2;
   }
 
-  /* private void printVolume() {
-    System.out.println("volume: " + getVolume());
+  private void updateFloatValue() {
+    float range = maxX - minX;
+    float value = buttonX - minX;
+    floatValue = value / range;
   }
 
-  // How to convert buttonX to a scale 0 - 100
+  /* private void printVolume() { System.out.println("volume: " + getVolume()); }
 
-  private int getVolume() {
-    return (int) (((float) (buttonX - minX) / (maxX - minX)) * 100);
-  }
+  --- --- How to convert buttonX to a scale 0 - 100
+
+  private int getVolume() { return (int) (((float) (buttonX - minX) / (maxX - minX)) * 100); }
   */
 
   private int clamp(int value, int min, int max) {
@@ -110,6 +116,10 @@ public class VolumeButton extends PauseButton {
 
   public void setMousePressed(boolean mousePressed) {
     this.mousePressed = mousePressed;
+  }
+
+  public float getFloatValue() {
+    return floatValue;
   }
 }
 

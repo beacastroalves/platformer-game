@@ -47,6 +47,7 @@ public class Menu extends State implements StateMethods {
   @Override
   public void draw(Graphics g) {
 
+
     g.drawImage(backgroundImgPink, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
     g.setColor(new Color(80, 111, 27, 150));
     g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
@@ -78,6 +79,9 @@ public class Menu extends State implements StateMethods {
       if (isIn(e, mb)) {
         if (mb.isMousePressed()) {
           mb.applyGamestate();
+        }
+        if (mb.getState() == GameState.PLAYING) {
+          game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLevelIndex());
         }
         break;
       }
